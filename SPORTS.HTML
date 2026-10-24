@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apex Athletics | Sports Equipment & Gear</title>
+  
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Google Identity Services SDK -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-['Inter']">
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="bg-white sticky top-0 z-50 shadow-sm border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-md">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <span class="text-2xl font-black tracking-tight text-gray-900">APEX<span class="text-emerald-600">SPORTS</span></span>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex space-x-8 font-semibold text-gray-600">
+        <a href="#featured" class="hover:text-emerald-600 transition">Equipment</a>
+        <a href="#featured" class="hover:text-emerald-600 transition">Footwear</a>
+        <a href="#featured" class="hover:text-emerald-600 transition">Apparel</a>
+        <a href="#contact" class="hover:text-emerald-600 transition">Contact</a>
+      </nav>
+
+      <!-- User Auth Section -->
+      <div class="flex items-center space-x-4">
+        <!-- Google Sign-In Button Container -->
+        <div id="googleBtnWrapper">
+          <div id="g_id_onload"
+               data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
+               data-callback="handleCredentialResponse"
+               data-auto_prompt="false">
+          </div>
+          <div class="g_id_signin" 
+               data-type="standard" 
+               data-size="medium" 
+               data-theme="outline" 
+               data-text="signin_with" 
+               data-shape="pill">
+          </div>
+        </div>
+
+        <!-- Logged-in Profile Badge (Hidden initially) -->
+        <div id="userProfile" class="hidden items-center space-x-3 bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200">
+          <img id="userAvatar" class="w-8 h-8 rounded-full border border-gray-300" src="" alt="Avatar" />
+          <span id="userName" class="text-sm font-semibold text-gray-800"></span>
+          <button onclick="handleSignOut()" class="text-xs text-red-500 hover:text-red-700 font-bold ml-2">
+            Logout
+          </button>
+        </div>
+
+        <!-- Cart Icon -->
+        <button class="relative p-2 text-gray-700 hover:text-emerald-600 transition">
+          <i class="fa-solid fa-bag-shopping text-xl"></i>
+          <span id="cartCount" class="absolute -top-1 -right-1 bg-emerald-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section class="relative bg-gray-900 text-white py-24 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+          Gear Up For Performance
+        </span>
+        <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight tracking-tight">
+          Level Up Your Game With Pro Gear.
+        </h1>
+        <p class="mt-4 text-gray-300 text-lg">
+          Explore top-grade gear, kit, and apparel for cricket, football, fitness, and outdoor sports.
+        </p>
+        <div class="mt-8 flex gap-4">
+          <a href="#featured" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg shadow-lg transition">
+            Shop Collection
+          </a>
+          <a href="#contact" class="px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-lg border border-white/20 transition">
+            Visit Store
+          </a>
+        </div>
+      </div>
+      <div class="flex justify-center">
+        <div class="w-80 h-80 sm:w-96 sm:h-96 rounded-3xl bg-gradient-to-tr from-emerald-600 to-teal-400 p-1 shadow-2xl flex items-center justify-center text-8xl text-white">
+          <i class="fa-solid fa-trophy"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRODUCTS SECTION ================= -->
+  <section id="featured" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="flex justify-between items-end mb-10">
+      <div>
+        <h2 class="text-3xl font-extrabold text-gray-900">Featured Gear</h2>
+        <p class="text-gray-500 mt-1">Handpicked equipment tailored for athletes.</p>
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      
+      <!-- Product 1 -->
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col justify-between">
+        <div class="h-48 bg-gray-100 flex items-center justify-center text-5xl text-emerald-600">
+          <i class="fa-solid fa-baseball-bat-ball"></i>
+        </div>
+        <div class="p-5 flex flex-col flex-grow justify-between">
+          <div>
+            <span class="text-xs font-semibold text-emerald-600 uppercase tracking-wide">Cricket</span>
+            <h3 class="font-bold text-lg text-gray-800 mt-1">English Willow Bat</h3>
+            <p class="text-sm text-gray-500 mt-1">Grade 1 willow with optimal balance and power sweet-spot.</p>
+          </div>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="text-xl font-extrabold text-gray-900">$180.00</span>
+            <button onclick="addToCart()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-lg transition">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col justify-between">
+        <div class="h-48 bg-gray-100 flex items-center justify-center text-5xl text-emerald-600">
+          <i class="fa-solid fa-futbol"></i>
+        </div>
+        <div class="p-5 flex flex-col flex-grow justify-between">
+          <div>
+            <span class="text-xs font-semibold text-emerald-600 uppercase tracking-wide">Football</span>
+            <h3 class="font-bold text-lg text-gray-800 mt-1">Pro Match Ball</h3>
+            <p class="text-sm text-gray-500 mt-1">FIFA-certified match ball with thermal bonding technology.</p>
+          </div>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="text-xl font-extrabold text-gray-900">$45.00</span>
+            <button onclick="addToCart()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-lg transition">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col justify-between">
+        <div class="h-48 bg-gray-100 flex items-center justify-center text-5xl text-emerald-600">
+          <i class="fa-solid fa-dumbbell"></i>
+        </div>
+        <div class="p-5 flex flex-col flex-grow justify-between">
+          <div>
+            <span class="text-xs font-semibold text-emerald-600 uppercase tracking-wide">Fitness</span>
+            <h3 class="font-bold text-lg text-gray-800 mt-1">Adjustable Hex Dumbbells</h3>
+            <p class="text-sm text-gray-500 mt-1">Solid cast iron encased in heavy-duty rubber coating.</p>
+          </div>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="text-xl font-extrabold text-gray-900">$65.00</span>
+            <button onclick="addToCart()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-lg transition">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col justify-between">
+        <div class="h-48 bg-gray-100 flex items-center justify-center text-5xl text-emerald-600">
+          <i class="fa-solid fa-shoe-prints"></i>
+        </div>
+        <div class="p-5 flex flex-col flex-grow justify-between">
+          <div>
+            <span class="text-xs font-semibold text-emerald-600 uppercase tracking-wide">Footwear</span>
+            <h3 class="font-bold text-lg text-gray-800 mt-1">Speed Track Running Shoes</h3>
+            <p class="text-sm text-gray-500 mt-1">Breathable mesh cushioning for sprint and long-distance.</p>
+          </div>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="text-xl font-extrabold text-gray-900">$95.00</span>
+            <button onclick="addToCart()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-lg transition">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= CONTACT / STORE INFO ================= -->
+  <footer id="contact" class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <h4 class="text-white font-bold text-lg mb-3">APEX SPORTS</h4>
+        <p class="text-sm leading-relaxed">Your one-stop destination for authentic athletic gear, tournament kits, and professional training equipment.</p>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-lg mb-3">Shop Hours & Support</h4>
+        <p class="text-sm">Monday – Saturday: 9:00 AM – 9:00 PM</p>
+        <p class="text-sm">Sunday: 10:00 AM – 6:00 PM</p>
+        <p class="text-sm mt-2">Email: support@apexsports.com</p>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-lg mb-3">Newsletter</h4>
+        <p class="text-sm mb-3">Get 10% off your first sports gear order.</p>
+        <div class="flex">
+          <input type="email" placeholder="Enter your email" class="px-3 py-2 text-sm w-full rounded-l-lg bg-gray-800 border border-gray-700 text-white focus:outline-none" />
+          <button class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-r-lg font-semibold text-sm">Join</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= AUTH & CART JAVASCRIPT ================= -->
+  <script>
+    let cartItems = 0;
+
+    function addToCart() {
+      cartItems++;
+      document.getElementById('cartCount').innerText = cartItems;
+    }
+
+    // Decode JWT received from Google Identity Services
+    function parseJwt(token) {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+      return JSON.parse(jsonPayload);
+    }
+
+    // Callback when user signs in with Google
+    function handleCredentialResponse(response) {
+      const responsePayload = parseJwt(response.credential);
+
+      // Access user info
+      const user = {
+        name: responsePayload.name,
+        email: responsePayload.email,
+        picture: responsePayload.picture
+      };
+
+      // Update UI for logged-in user
+      document.getElementById('userName').textContent = user.name;
+      document.getElementById('userAvatar').src = user.picture;
+
+      document.getElementById('googleBtnWrapper').classList.add('hidden');
+      document.getElementById('userProfile').classList.remove('hidden');
+      document.getElementById('userProfile').classList.add('flex');
+
+      // Store basic session state in browser
+      localStorage.setItem('currentUser', JSON.stringify(user));
+    }
+
+    // Sign out function
+    function handleSignOut() {
+      localStorage.removeItem('currentUser');
+      document.getElementById('userProfile').classList.remove('flex');
+      document.getElementById('userProfile').classList.add('hidden');
+      document.getElementById('googleBtnWrapper').classList.remove('hidden');
+    }
+
+    // Check existing login on page reload
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedUser = localStorage.getItem('currentUser');
+      if (savedUser) {
+        const user = JSON.parse(savedUser);
+        document.getElementById('userName').textContent = user.name;
+        document.getElementById('userAvatar').src = user.picture;
+
+        document.getElementById('googleBtnWrapper').classList.add('hidden');
+        document.getElementById('userProfile').classList.remove('hidden');
+        document.getElementById('userProfile').classList.add('flex');
+      }
+    });
+  </script>
+</body>
+</html>
